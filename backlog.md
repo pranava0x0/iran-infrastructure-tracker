@@ -21,6 +21,7 @@
 | B-005 | Mobile-optimized map controls | medium | simple | S | Better touch interaction on phones | proposed |
 | B-006 | Bookmark/save scenarios | low | moderate | M | Users can revisit analysis without re-entering params | proposed |
 | B-007 | Add more ME region data centers | high | simple | M | Broader geographic coverage = more useful tool | proposed |
+| B-008 | Gulf data center conflict-risk dashboard | high | complex | XL | Financiers and policy makers can assess strike exposure, investment impact, and cloud outage duration per facility — directly answers "what's at risk and how bad was it?" | proposed |
 
 ---
 
