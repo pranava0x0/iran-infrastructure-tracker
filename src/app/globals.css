@@ -4,33 +4,35 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --border: 214 32% 91%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+    /* Warm parchment light mode — inspired by Claude's editorial warmth */
+    --background: 35 35% 97%;
+    --foreground: 28 30% 12%;
+    --card: 35 25% 99%;
+    --card-foreground: 28 30% 12%;
+    --border: 35 20% 87%;
+    --muted: 35 25% 94%;
+    --muted-foreground: 30 12% 46%;
+    --accent: 35 20% 92%;
+    --accent-foreground: 28 30% 12%;
     --destructive: 0 84% 60%;
     --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
+    --primary-foreground: 0 0% 100%;
   }
 
   .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 9%;
-    --card-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
+    /* Warm briefing-room dark mode — warm near-blacks, not cold navy */
+    --background: 27 20% 7%;
+    --foreground: 35 20% 93%;
+    --card: 27 18% 10%;
+    --card-foreground: 35 20% 93%;
+    --border: 28 14% 18%;
+    --muted: 27 15% 13%;
+    --muted-foreground: 30 10% 56%;
+    --accent: 27 15% 14%;
+    --accent-foreground: 35 20% 93%;
     --destructive: 0 63% 31%;
     --primary: 217 91% 60%;
-    --primary-foreground: 222 47% 6%;
+    --primary-foreground: 27 20% 7%;
   }
 }
 
@@ -40,19 +42,27 @@
   }
 }
 
-/* Leaflet overrides for dark mode */
+/* Leaflet overrides */
 .dark .leaflet-container {
-  background: #2b2b2b;
+  background: #1a1713;
 }
 
 .dark .leaflet-control-zoom a {
-  background: hsl(222 47% 9%);
-  color: hsl(210 40% 98%);
-  border-color: hsl(217 33% 17%);
+  background: hsl(27 18% 10%);
+  color: hsl(35 20% 93%);
+  border-color: hsl(28 14% 18%);
 }
 
 .dark .leaflet-popup-content-wrapper,
 .dark .leaflet-popup-tip {
-  background: hsl(222 47% 9%);
-  color: hsl(210 40% 98%);
+  background: hsl(27 18% 10%);
+  color: hsl(35 20% 93%);
+  border: 1px solid hsl(28 14% 18%);
+}
+
+/* Bottom nav safe area for mobile */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }

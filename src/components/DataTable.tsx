@@ -203,14 +203,14 @@ export default function DataTable() {
         <table className="w-full text-xs">
           <thead>
             <tr className="border-b border-border bg-muted/50">
+                  {/* Always visible columns */}
               {(
                 [
-                  ["country", "Country"],
-                  ["site", "Site"],
-                  ["capacityMW", "Capacity"],
-                  ["commitmentUSD", "Commitment"],
-                  ["status", "Status"],
-                ] as [SortKey, string][]
+                  ["country", "Country", ""],
+                  ["site", "Site", ""],
+                  ["capacityMW", "MW", ""],
+                  ["status", "Status", ""],
+                ] as [SortKey, string, string][]
               ).map(([key, label]) => (
                 <th
                   key={key}
@@ -221,8 +221,15 @@ export default function DataTable() {
                   {sortKey === key && (sortAsc ? " ↑" : " ↓")}
                 </th>
               ))}
-              <th className="px-3 py-2 text-left font-medium">Confidence</th>
-              <th className="px-3 py-2 text-left font-medium">Operators</th>
+              {/* Hidden on mobile */}
+              <th
+                onClick={() => handleSort("commitmentUSD")}
+                className="hidden cursor-pointer px-3 py-2 text-left font-medium hover:text-foreground sm:table-cell"
+              >
+                Commitment{sortKey === "commitmentUSD" && (sortAsc ? " ↑" : " ↓")}
+              </th>
+              <th className="hidden px-3 py-2 text-left font-medium sm:table-cell">Confidence</th>
+              <th className="hidden px-3 py-2 text-left font-medium md:table-cell">Operators</th>
               <th className="px-3 py-2 text-left font-medium">Sources</th>
             </tr>
           </thead>
@@ -252,7 +259,6 @@ export default function DataTable() {
                 <td className="px-3 py-2 tabular-nums">
                   {formatMW(site.capacityMW)}
                 </td>
-                <td className="px-3 py-2">{site.commitmentLabel}</td>
                 <td className="px-3 py-2">
                   <span
                     className={cn(
@@ -263,7 +269,9 @@ export default function DataTable() {
                     {site.status}
                   </span>
                 </td>
-                <td className="px-3 py-2">
+                {/* Hidden on mobile */}
+                <td className="hidden px-3 py-2 sm:table-cell">{site.commitmentLabel}</td>
+                <td className="hidden px-3 py-2 sm:table-cell">
                   <span
                     className={cn(
                       "rounded-full px-2 py-0.5 text-[10px] font-medium",
@@ -273,7 +281,7 @@ export default function DataTable() {
                     {site.confidence}
                   </span>
                 </td>
-                <td className="px-3 py-2">
+                <td className="hidden px-3 py-2 md:table-cell">
                   <div className="flex flex-wrap gap-1">
                     {site.operators.slice(0, 3).map((op) => (
                       <span

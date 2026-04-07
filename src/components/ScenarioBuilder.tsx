@@ -48,8 +48,8 @@ export default function ScenarioBuilder() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl p-4">
-      <div className="mb-6">
+    <div className="mx-auto max-w-7xl p-4 pb-20 sm:pb-4">
+      <div className="mb-4">
         <h1 className="text-xl font-bold">Strike Scenario Builder</h1>
         <p className="text-xs text-muted-foreground">
           Select sites, set severity/duration, and view estimated impact.

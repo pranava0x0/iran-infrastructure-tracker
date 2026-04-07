@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, CircleMarker, Tooltip } from "react-leaflet";
 import { dataCenters } from "@/data/dataCenters";
 import { DataCenter } from "@/lib/types";
 import { formatMW } from "@/lib/utils";
+import { useIsMobile } from "@/lib/useDeviceType";
 import SiteDetailPanel from "./SiteDetailPanel";
 import "leaflet/dist/leaflet.css";
 
@@ -23,6 +24,7 @@ const MARKER_RADIUS = 7;
 export default function MapView() {
   const [selected, setSelected] = useState<DataCenter | null>(null);
   const [dark, setDark] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -34,12 +36,15 @@ export default function MapView() {
     return () => observer.disconnect();
   }, []);
 
+  // Mobile: 3rem top nav + 4rem bottom nav = 7rem; Desktop: 3rem top nav only
+  const mapHeight = isMobile ? "h-[calc(100vh-7rem)]" : "h-[calc(100vh-3rem)]";
+
   return (
-    <div className="relative flex h-[calc(100vh-3rem)]">
-      <div className={`flex-1 transition-all ${selected ? "mr-0 sm:mr-96" : ""}`}>
+    <div className={`relative flex ${mapHeight}`}>
+      <div className={`flex-1 transition-all ${selected && !isMobile ? "sm:mr-96" : ""}`}>
         <MapContainer
           center={[25.5, 48]}
-          zoom={5}
+          zoom={isMobile ? 4 : 5}
           className="h-full w-full"
           scrollWheelZoom
         >
@@ -78,12 +83,12 @@ export default function MapView() {
         {Object.entries(STATUS_COLORS).map(([status, color]) => (
           <span key={status} className="flex items-center gap-1">
             <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
-            {status}
+            <span className="hidden sm:inline">{status}</span>
           </span>
         ))}
         <span className="flex items-center gap-1">
           <span className="inline-block h-2 w-2 rounded-full border-[1.5px] border-red-500 bg-transparent" />
-          Damaged
+          <span className="hidden sm:inline">Damaged</span>
         </span>
       </div>
 
